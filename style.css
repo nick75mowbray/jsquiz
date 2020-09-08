@@ -8,12 +8,16 @@ h1, h2, h3, h4, h5, h6, button {
     font-family: 'Poppins', sans-serif;
 }
 body {
+    height: 100vh;
     background-color: #333333;
     background-image: linear-gradient(#009c91, #0a1c40);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 h1 {
     font-weight: 500;
     font-size: 3rem;
+    padding: 0;
 }
 /* first page opener */
 #opener {
@@ -43,12 +47,14 @@ h1 {
 /* navbar */
 nav {
     width: 100%;
+    position: fixed;
+    top: 0;
 }
 #nav-content {
     width: 100%;
     margin: 0 auto;
     padding: 10px 20px;
-    position: fixed;
+    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -63,4 +69,63 @@ nav {
     font-weight: 400;
     padding: 0 20px;
     margin-right: 25px;
+    display: inline;
+}
+#timer-display h1 {
+    display: inline;
+}
+/* questions */
+#mycarousel {
+    margin-top: 150px;
+}
+button.answer {
+    background-color: #0a1c4091;
+    border: none;
+    border-left: 3px solid #ffffff;
+    margin: 5px 0;
+    padding: 10px;
+    text-align: left;
+}
+button.answer:hover {
+    border-left: 8px solid #ffffff;
+}
+button.incorrect:active, button.incorrect:focus {
+    border: none;
+    outline: none;
+    border-left: 8px solid #b30101;
+    background-color: #400a1391;
+}
+button.correct:active, button.correct:focus {
+    border: none;
+    outline: none;
+    border-left: 8px solid #07b301;
+    background-color: #10400a91;
+}
+.question {
+    font-weight: 300;
+}
+.carousel-item {
+    margin-left: 10vw;
+    max-width: 80vw;
+    transition: transform 3s ease, opacity .5s ease-out !important;
+}
+@media only screen and (max-width: 600px){
+    #nav-content li {
+        margin-right: 10px;
+        padding: 0;
+    }
+    #nav-content {
+        padding: 5px;
+    }
+    #timer-display {
+        padding: 0;
+        margin-right: 5px;
+    }
+    #timer-display h1 {
+        font-size: 2rem;
+    }
+    .carousel-item {
+        margin-left: 10px;
+        max-width: 95vw;
+    }
 }

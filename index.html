@@ -10,13 +10,17 @@
 </head>
 <body>
     <!-- nav bar -->
-    <nav>
+    <nav id="navbar" style="display: none;">
         <div id="nav-content">
             <ul>
                 <li><a>Scores</a></li>
                 <li id="highscore-display">Highscore: 00:00</li>
             </ul>
-            <h1 id="timer-display">00:00</h1>
+            <div id="timer-display" style="display: inline;">
+                <h1 id="minutesDigits">00</h1>
+                <h1>:</h1>
+                <h1 id="secondsDigits">00</h1>
+            </div>
         </div>
     </nav>
     <!-- opening screen -->
@@ -27,32 +31,48 @@
         </div>
     </div>
     <!-- questions -->
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" 
-    data-interval="false" data-wrap="false">
+    <div id="mycarousel" class="carousel slide" data-ride="carousel" 
+    data-interval="false" data-wrap="false" data-touch="false" style="display: none;">
         <div class="carousel-inner">
-          <div class="carousel-item active">
-              <h1 class="q-number">Q1</h1>
+          <div class="carousel-item active container">
+            <div class="d-flex flex-column">
+            <h1 class="q-number">Q1.</h1>
               <h3 class="question">How do you write a multiline comment?</h3>
               <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
+              <button class="answer correct">/* comment */</button>
+              <button class="answer incorrect">// comment //</button>
+              <button class="answer incorrect">## comment ##</button>
+            </div>  
           </div>
-          <div class="carousel-item">
-            <h1>Q1</h1>
-              <h3>How do you write a multiline comment?</h3>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
+          <div class="carousel-item container">
+            <div class="d-flex flex-column">
+            <h1 class="q-number">Q2.</h1>
+              <h3 class="question">How do you call a function?</h3>
+              <button class="answer correct">myFunction()</button>
+              <button class="answer incorrect">myFunction.run()</button>
+              <button class="answer incorrect">start(myFunction)</button>
+              <button class="answer incorrect">call.myFunction()</button>
+            </div>
           </div>
-          <div class="carousel-item">
-            <h1>Q1</h1>
-              <h3>How do you write a multiline comment?</h3>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
-              <button class="answer incorrect">(( comment ))</button>
+          <div class="carousel-item container">
+            <div class="d-flex flex-column">
+            <h1 class="q-number">Q3.</h1>
+              <h3 class="question">How do you create an alert?</h3>
+              <button class="answer incorrect">console.log(alert"alert this")</button>
+              <button class="answer incorrect">var alert = "alert this"</button>
+              <button class="answer incorrect">"alert this".alert()</button>
+              <button class="answer correct">alert("alert this")</button>
+            </div>
+          </div>
+          <div class="carousel-item container">
+            <div class="d-flex flex-column">
+            <h1 class="q-number">Q4.</h1>
+              <h class="question"3>What is the BEST method to get an element with an id of item?</h>
+              <button class="answer incorrect">document.querySelector('#item')</button>
+              <button class="answer incorrect">window.getElement.item</button>
+              <button class="answer incorrect">document.getElementByName('item')</button>
+              <button class="answer correct">document.getElementById('item')</button>
+            </div>
           </div>
         </div>
       </div>
