@@ -12,22 +12,20 @@
     <!-- nav bar -->
     <nav id="navbar" style="display: none;">
         <div id="nav-content">
-            <ul>
-                <li><a>Scores</a></li>
-                <li id="highscore-display">Highscore: 00:00</li>
-            </ul>
+                <h5 id="highscore-display">Highscore: 00:00</h5>
             <div id="timer-display" style="display: inline;">
+                <h3 id ="addfive" style="display:none;color:#F79128;margin-right:5px;">+15</h3>
                 <h1 id="minutesDigits">00</h1>
-                <h1>:</h1>
+                <h1 id="digit-dots">:</h1>
                 <h1 id="secondsDigits">00</h1>
             </div>
         </div>
     </nav>
     <!-- opening screen -->
-    <div id="opener">
+    <div id="opener" class="pop-up">
         <div id="opener-content">
             <h1>Javascript Quiz</h1>
-            <button id="begin-btn">START</button>
+            <button id="begin-btn" class="pop-up-btn">START</button>
         </div>
     </div>
     <!-- questions -->
@@ -67,13 +65,36 @@
           <div class="carousel-item container">
             <div class="d-flex flex-column">
             <h1 class="q-number">Q4.</h1>
-              <h class="question"3>What is the BEST method to get an element with an id of item?</h>
-              <button class="answer incorrect">document.querySelector('#item')</button>
-              <button class="answer incorrect">window.getElement.item</button>
-              <button class="answer incorrect">document.getElementByName('item')</button>
-              <button class="answer correct">document.getElementById('item')</button>
+              <h3 class="question">What is the BEST method to get an element with an id of item?</h3>
+              <button class="answer incorrect last">document.querySelector('#item')</button>
+              <button class="answer incorrect last">window.getElement.item</button>
+              <button class="answer incorrect last">document.getElementByName('item')</button>
+              <button class="answer correct last">document.getElementById('item')</button>
             </div>
           </div>
+        </div>
+      </div>
+      <!-- final score and enter name -->
+      <div id="enter-name" class="pop-up" style="display:none;">
+        <div class="pop-up-content">
+            <h1>Congratulations!</h1>
+            <h1 id="your-score"></h1>
+            <form id="myform">
+              <label for="name">Name:</label>
+              <input type="text" maxlength="35" name="name" id="name"/>
+          </form>
+          <button id="name-btn" class="pop-up-btn">NEXT</button>
+        </div>
+      </div>
+      <!-- scoreboard -->
+      <div id="scoreboard" style="display:none">
+        <div class="container">
+            <h1 id="score-title">Highscores: </h1>
+            <div id="score-table">
+                <ul>
+
+                </ul>
+            </div>
         </div>
       </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

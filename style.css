@@ -19,8 +19,11 @@ h1 {
     font-size: 3rem;
     padding: 0;
 }
+h5 {
+    font-weight: 300;
+}
 /* first page opener */
-#opener {
+.pop-up {
     z-index: 4;
     width: 100%;
     height: 100vh;
@@ -29,7 +32,7 @@ h1 {
     justify-content: space-around;
     align-items: center;
 }
-#begin-btn {
+.pop-up-btn {
     margin-top: 25px;
     width: 100px;
     padding: 10px 0;
@@ -39,10 +42,13 @@ h1 {
     font-weight: 600px;
     font-size: 1rem;
 }
-#begin-btn:hover {
+.pop-up-btn:hover {
     background-color: #F79128;
     color: #ffffff;
     box-shadow: 0 0 7px 2px #33333373;
+}
+.pop-up-btn:focus {
+    outline: none;
 }
 /* navbar */
 nav {
@@ -54,7 +60,6 @@ nav {
     width: 100%;
     margin: 0 auto;
     padding: 10px 20px;
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -103,11 +108,35 @@ button.correct:active, button.correct:focus {
 }
 .question {
     font-weight: 300;
+    font-size: 1.4rem;
 }
 .carousel-item {
     margin-left: 10vw;
     max-width: 80vw;
     transition: transform 3s ease, opacity .5s ease-out !important;
+}
+/* enter name pop up */
+form {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+#name {
+    margin: 20px 20px;
+    padding: 0 10px;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+}
+#name:focus {
+    outline: none;
+    border: 1px solid #F79128;
+}
+#your-score {
+    margin: 30px 0;
+    font-size: 4rem;
+    color: #F79128;
+}
+form label {
+    font-weight: 200;
 }
 @media only screen and (max-width: 600px){
     #nav-content li {
