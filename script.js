@@ -8,8 +8,9 @@ var dots = document.getElementById('digit-dots');
 var addFive = document.getElementById('addfive');
 var enterNameDiv = document.getElementById('enter-name');
 var yourScore = document.getElementById('your-score');
-var name = document.getElementById('name');
+var nameText = document.getElementById('name');
 var scoreBoard = document.getElementById('scoreboard');
+var nameBtn = document.getElementById('name-btn');
 
 var timeoutColor;
 var timer;
@@ -24,22 +25,18 @@ var finalScore = "";
 var scoreSeconds = "";
 var scoreMinutes = "";
 
-var score = {
-    name: 
+var scoresArray = [];
 
-}
-
-//opening screen full width div with button
 //button starts game and closes div
-
 startBtn.addEventListener("click", function(){
     openingDiv.style.display="none";
     navBar.style.display="block";
     myCarousel.style.display="block";
+    // start timer
     timer = setInterval(counter, 1000);
 });
-//create timer to count up
-//create function that increases timer if incorrect answer
+
+// timer function
 function counter(){
     seconds++;
     if (seconds < 10){
@@ -77,6 +74,7 @@ function addSeconds(){
     }, 2000);
 }
 
+// end the timer and collect final values
 function endTimer(){
     scoreMinutes = minutesOutput;
     console.log(scoreMinutes);
@@ -85,23 +83,22 @@ function endTimer(){
     clearInterval(timer);
 }
 
-function saveScore(){
-    enterNameDiv.style.display="none";
-    scoreBoard.style.display="block";
-}
-//create carosel for questions and answers
-//function to change answer appearance once clicked
-
-//new div for final score / name input
-
-//store name and score as an object
-
-//new page for high scores
-
-
+// slide carousel to next question
 function nextQuestion() {
     $('.carousel').carousel('next')
 };
+
+// save the users time and name
+function saveScore(){
+    enterNameDiv.style.display="none";
+    scoreBoard.style.display="block";
+    var scoreObject = {
+        name: nameText.value,
+        score: finalScore
+    };
+    scoresArray.push(scoreObject);
+    console.log("scoresArray"+ scoresArray);
+}
 
 //add functions to every button with class of answer
 // START code from https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
@@ -112,6 +109,7 @@ document.querySelectorAll('.answer').forEach(item => {
   });
 // END code from flaviocopes.com
 
+// add event to all buttons with a class of incorrect
 document.querySelectorAll('.incorrect').forEach(item => {
     item.addEventListener('click', event => {
       addSeconds();
@@ -125,6 +123,10 @@ document.querySelectorAll('.last').forEach(item => {
         navBar.style.display="none";
         myCarousel.style.display="none";
         enterNameDiv.style.display="flex";
-        yourScore.innerHTML = scoreMinutes + ":" + scoreSeconds;
+        finalScore = scoreMinutes + ":" + scoreSeconds;
+        yourScore.innerHTML = finalScore;
     })
   });
+
+// add event to button on final score page
+nameBtn.addEventListener("click", saveScore);
