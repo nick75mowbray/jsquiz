@@ -11,6 +11,7 @@ var yourScore = document.getElementById('your-score');
 var nameText = document.getElementById('name');
 var scoreBoard = document.getElementById('scoreboard');
 var nameBtn = document.getElementById('name-btn');
+var againBtn = document.getElementById('go-again');
 
 var timeoutColor;
 var timer;
@@ -25,7 +26,12 @@ var finalScore = "";
 var scoreSeconds = "";
 var scoreMinutes = "";
 
-var scoresArray = [];
+// set the previous time display in navbar
+var previousTime = localStorage.getItem("prevTimeKey");
+var prevTimeText = document.getElementById("highscore-display");
+if (previousTime!==null){
+    prevTimeText.innerHTML = "Previous Time: "+previousTime;
+}
 
 //button starts game and closes div
 startBtn.addEventListener("click", function(){
@@ -83,23 +89,76 @@ function endTimer(){
     clearInterval(timer);
 }
 
-// slide carousel to next question
+// slide carousel to next question with a delay of 500ms
+var sliderDelay;
 function nextQuestion() {
-    $('.carousel').carousel('next')
+    sliderDelay = setTimeout(function(){
+        $('.carousel').carousel('next')
+    }, 500);
 };
+
+var scoresArray = [];
+var scoreKey = localStorage.getItem("scoreKey");
+var scoreList = document.getElementById('scorelist');
+var namesArray = [];
+var nameKey = localStorage.getItem("nameKey");
 
 // save the users time and name
 function saveScore(){
     enterNameDiv.style.display="none";
     scoreBoard.style.display="block";
-    var scoreObject = {
-        name: nameText.value,
-        score: finalScore
-    };
-    scoresArray.push(scoreObject);
+    init();
+    scoresArray.push(finalScore);
+    namesArray.push(nameText.value.trim());
     console.log("scoresArray"+ scoresArray);
+    console.log("namesArray" + namesArray);
+    
+    storeScores();
+    renderScores();
 }
 
+
+function renderScores(){
+    // clear scores
+    scoreList.innerHTML = "";
+    // render a new li for each score
+    for (var i = 0; i < scoresArray.length; i++){
+        var score = scoresArray[i];
+        var name = namesArray[i]
+
+        // create div
+        var scoreDiv = document.createElement('div');
+        scoreDiv.classList.add('score-entries');
+
+        var nameh2 = document.createElement("h2");
+        nameh2.textContent = name;
+        nameh2.setAttribute("data-index", i);
+
+        var scoreh2 = document.createElement("h2");
+        scoreh2.textContent = score;
+        scoreh2.setAttribute("data-index", i); 
+
+        scoreDiv.appendChild(nameh2);
+        scoreDiv.appendChild(scoreh2);
+
+        scoreList.appendChild(scoreDiv);
+    }
+}
+
+function init(){
+    if(scoreKey===null||nameKey===null){
+        console.log("nothing in localStorage for scores");
+    } else {
+        scoresArray = JSON.parse(localStorage.getItem("scoreKey"));
+        namesArray = JSON.parse(localStorage.getItem("nameKey"));
+    }
+    renderScores();
+}
+
+function storeScores() {
+    localStorage.setItem("scoreKey", JSON.stringify(scoresArray));
+    localStorage.setItem("nameKey", JSON.stringify(namesArray));
+}
 //add functions to every button with class of answer
 // START code from https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
 document.querySelectorAll('.answer').forEach(item => {
@@ -116,17 +175,28 @@ document.querySelectorAll('.incorrect').forEach(item => {
     })
   });
 
+  var endSlides;
 //add events to all buttons with class of last  
 document.querySelectorAll('.last').forEach(item => {
     item.addEventListener('click', event => {
-        endTimer();
-        navBar.style.display="none";
-        myCarousel.style.display="none";
-        enterNameDiv.style.display="flex";
-        finalScore = scoreMinutes + ":" + scoreSeconds;
-        yourScore.innerHTML = finalScore;
-    })
+        // delay end timer to make sure any penalties on the question are added
+        endSlides = setTimeout(function(){
+            endTimer();
+            navBar.style.display="none";
+            myCarousel.style.display="none";
+            enterNameDiv.style.display="flex";
+            finalScore = scoreMinutes + ":" + scoreSeconds;
+            yourScore.innerHTML = finalScore;
+            localStorage.setItem("prevTimeKey", finalScore);
+    }, 1000);
   });
+});
 
 // add event to button on final score page
 nameBtn.addEventListener("click", saveScore);
+
+// add event to go again button on scoreboard page
+againBtn.addEventListener("click", function(){
+    //reload the page
+    location.reload();
+});

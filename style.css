@@ -22,6 +22,9 @@ h1 {
 h5 {
     font-weight: 300;
 }
+h2 {
+    font-weight: 400;
+}
 /* first page opener */
 .pop-up {
     z-index: 4;
@@ -113,7 +116,7 @@ button.correct:active, button.correct:focus {
 .carousel-item {
     margin-left: 10vw;
     max-width: 80vw;
-    transition: transform 3s ease, opacity .5s ease-out !important;
+    transition: transform 1.5s ease, opacity .5s ease-out !important;
 }
 /* enter name pop up */
 form {
@@ -137,6 +140,21 @@ form {
 }
 form label {
     font-weight: 200;
+}
+/* scoreboard */
+#score-title {
+    margin-top: 120px;
+    text-align: center;
+}
+#scorelist li {
+    list-style: none;
+    font-size: 2rem;
+    background-color: #0a1c4091;
+    padding: 10px;
+}
+.score-entries {
+    display: flex;
+    justify-content: space-between;
 }
 @media only screen and (max-width: 600px){
     #nav-content li {
