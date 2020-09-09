@@ -1,3 +1,4 @@
+// declare variables
 var startBtn = document.getElementById('begin-btn');
 var openingDiv = document.getElementById('opener');
 var answerbtn = document.getElementsByClassName("answer");
@@ -35,6 +36,7 @@ if (previousTime!==null){
 
 //button starts game and closes div
 startBtn.addEventListener("click", function(){
+    // show questions/ nav and close opening screen
     openingDiv.style.display="none";
     navBar.style.display="block";
     myCarousel.style.display="block";
@@ -80,15 +82,6 @@ function addSeconds(){
     }, 2000);
 }
 
-// end the timer and collect final values
-function endTimer(){
-    scoreMinutes = minutesOutput;
-    console.log(scoreMinutes);
-    scoreSeconds = secondsOutput;
-    console.log(scoreSeconds);
-    clearInterval(timer);
-}
-
 // slide carousel to next question with a delay of 500ms
 var sliderDelay;
 function nextQuestion() {
@@ -97,6 +90,14 @@ function nextQuestion() {
     }, 500);
 };
 
+// end the timer and collect final values
+function endTimer(){
+    scoreMinutes = minutesOutput;
+    scoreSeconds = secondsOutput;
+    clearInterval(timer);
+}
+
+// declare variables for score in localStorage
 var scoresArray = [];
 var scoreKey = localStorage.getItem("scoreKey");
 var scoreList = document.getElementById('scorelist');
@@ -110,14 +111,12 @@ function saveScore(){
     init();
     scoresArray.push(finalScore);
     namesArray.push(nameText.value.trim());
-    console.log("scoresArray"+ scoresArray);
-    console.log("namesArray" + namesArray);
     
     storeScores();
     renderScores();
 }
 
-
+// function to render names and score to page
 function renderScores(){
     // clear scores
     scoreList.innerHTML = "";
@@ -129,36 +128,38 @@ function renderScores(){
         // create div
         var scoreDiv = document.createElement('div');
         scoreDiv.classList.add('score-entries');
-
+        // create h2 element for name
         var nameh2 = document.createElement("h2");
         nameh2.textContent = name;
         nameh2.setAttribute("data-index", i);
-
+        // create h2 element for score
         var scoreh2 = document.createElement("h2");
         scoreh2.textContent = score;
         scoreh2.setAttribute("data-index", i); 
 
+        // add name, score and div to page
         scoreDiv.appendChild(nameh2);
         scoreDiv.appendChild(scoreh2);
-
         scoreList.appendChild(scoreDiv);
     }
 }
 
+// function to get names and scores and render to page
 function init(){
     if(scoreKey===null||nameKey===null){
-        console.log("nothing in localStorage for scores");
+        console.log("nothing in localStorage for scores or names");
     } else {
         scoresArray = JSON.parse(localStorage.getItem("scoreKey"));
         namesArray = JSON.parse(localStorage.getItem("nameKey"));
     }
     renderScores();
-}
-
+};
+// function to send names and scores to local storage
 function storeScores() {
     localStorage.setItem("scoreKey", JSON.stringify(scoresArray));
     localStorage.setItem("nameKey", JSON.stringify(namesArray));
-}
+};
+
 //add functions to every button with class of answer
 // START code from https://flaviocopes.com/how-to-add-event-listener-multiple-elements-javascript/
 document.querySelectorAll('.answer').forEach(item => {
