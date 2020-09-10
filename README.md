@@ -1,6 +1,5 @@
-# wk4_jsquiz
- homework project to create an interactive quiz using javascript
 ![screenshot of first screen](./screenshots/first-screen.jpg)
+[deployed site](https://nick75mowbray.github.io/wk4_jsquiz/)
 ## Overview
 This is website that uses javascript to create an interactive multiple choice quiz.
 ### features
